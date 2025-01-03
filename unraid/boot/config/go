@@ -1,0 +1,13 @@
+#!/bin/bash
+cp /boot/config/rules.d/60-persistent-storage.rules /etc/udev/rules.d/
+chmod 644 /etc/udev/rules.d/60-persistent-storage.rules
+cp /boot/config/custom_scripts/get_hdd_info.sh /usr/local/bin/
+chmod +x /usr/local/bin/get_hdd_info.sh
+
+udevadm control --reload-rules
+udevadm trigger --action=add /dev/sdb
+udevadm trigger --action=add /dev/sdc
+udevadm trigger --action=add /dev/sdd
+udevadm trigger --action=add /dev/sda
+
+/usr/local/sbin/emhttp 
