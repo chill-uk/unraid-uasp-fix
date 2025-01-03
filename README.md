@@ -91,7 +91,7 @@ label Memtest86+
   kernel /memtest
 ```
 
-UASP should now be disabled.
+Reboot your system and now UASP should be disabled.
 
 ## Understanding the problem:
 
