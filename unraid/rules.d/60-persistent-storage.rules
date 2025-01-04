@@ -58,7 +58,7 @@ KERNEL=="sd*[!0-9]|sr*", ENV{ID_SERIAL}!="?*", SUBSYSTEMS=="scsi", ATTRS{type}==
 # Run ata_id on non-removable USB Mass Storage (SATA/PATA disks in enclosures)
 KERNEL=="sd*[!0-9]|sr*", ENV{ID_SERIAL}!="?*", ATTR{removable}=="0", SUBSYSTEMS=="usb", IMPORT{program}="ata_id --export $devnode"
 # Override for VIA Labs 2109:0715
-KERNEL=="sd*[!0-9]|sr*", ENV{ID_SERIAL}!="?*", ATTRS{idProduct}=="0715", ATTRS{idVendor}=="2109", SUBSYSTEMS=="usb", IMPORT{program}="/usr/local/bin/get_hdd_info.sh $devnode"
+KERNEL=="sd*[!0-9]|sr*", ENV{ID_SERIAL}!="?*", ATTRS{idProduct}=="0715", ATTRS{idVendor}=="2109", SUBSYSTEMS=="usb", IMPORT{program}="/usr/local/bin/get_hdd_info.sh $devnode", ENV{ID_BUS}="usb"
 # Fall back usb_id for USB devices
 KERNEL=="sd*[!0-9]|sr*", ENV{ID_SERIAL}!="?*", SUBSYSTEMS=="usb", IMPORT{builtin}="usb_id"
 

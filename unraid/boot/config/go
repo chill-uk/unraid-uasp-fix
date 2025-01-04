@@ -5,11 +5,7 @@ cp /boot/config/custom_scripts/get_hdd_info.sh /usr/local/bin/
 chmod +x /usr/local/bin/get_hdd_info.sh
 
 udevadm control --reload-rules
-udevadm trigger --subsystem-match=usb
-# udevadm trigger --action=add /dev/sdb
-# udevadm trigger --action=add /dev/sdc
-# udevadm trigger --action=add /dev/sdd
-# udevadm trigger --action=add /dev/sda
+udevadm trigger
 
 # Start the Management Utility
 /usr/local/sbin/emhttp 
