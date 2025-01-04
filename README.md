@@ -27,7 +27,7 @@ CONFIG_USB_UAS=y
 ```
 Then UASP is enabled.
 
-## Why Don't I Just Disable UASP in Unraid 7 and get my disks back?
+## Why don't I just disable UASP in Unraid 7 and get my disks back?
 That's a valid solution if you just want to get it working as it was in Unraid 6. 
 But you miss out on performance improvements and reduction of processing overhead. 
 [What's the Difference Between USB UASP and BOT](https://www.electronicdesign.com/technologies/embedded/article/21800348/whats-the-difference-between-usb-uasp-and-bot)
@@ -66,10 +66,10 @@ Then edit your syslinux.cfg file:
 ```sh
 nano /boot/syslinux/syslinux.cfg
 ```
-Add the following append entry "usb_storage.quirks=2109:0715:u"  
-(where 2109:0715 was your controller ID from earlier)
+Add the following append entry "usb_storage.quirks=xxxx:xxxx:u" to your main Unraid OS menu item.   
+(where xxxx:xxxx was your controller ID from earlier) 
 
-```sh
+```
 default menu.c32
 menu title Lime Technology, Inc.
 prompt 0
@@ -90,7 +90,9 @@ label Unraid OS GUI Safe Mode (no plugins)
 label Memtest86+
   kernel /memtest
 ```
-
+```
+Ctrl-X, Y to save.
+```
 Reboot your system and now UASP should be disabled.
 
 ## Understanding the problem:
