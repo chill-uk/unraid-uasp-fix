@@ -35,9 +35,9 @@ But you miss out on performance improvements and reduction of processing overhea
   * It's a slightly more involved and you may need to re-apply the fix everytime you update unraid.
   * You get all of the added benefits of UASP.
 
-For both, you will first need to find the problamatic USB controller ID.
-
 # REQUIRED - Finding your USB controller ID
+
+For both options, you will first need to find the problamatic USB controller ID.
 
 Run this in the terminal of your Unraid server:  
 
@@ -160,7 +160,7 @@ nano /boot/config/rules.d/60-persistent-storage.rules
 ```
 
 Go to line 62 and change the ATTRS{idProduct}=="xxxx", ATTRS{idVendor}=="xxxx" values to the ones of your USB Controller  
-[Finding your USB controller ID's](#Finding-your-USB-controller-ID)
+[Finding your USB controller ID's](#Required---Finding-your-USB-controller-ID)
 
 For example, my entry is as follows:
 
