@@ -175,7 +175,7 @@ Ctrl-X, Y, ENTER to save.
 
 ## Testing
 
-We can test that it's all working by running the follwing commands in the terminal:
+We can test to see if it's all working by running the follwing commands in the terminal:
 
 ```sh
 udevadm control --reload-rules
