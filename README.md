@@ -139,11 +139,11 @@ Luckily for us, we can "overwrite" the rules by placing a new version in "/etc/u
 All of the files needed are as follows:
 
 * boot/config/go
- * ^^ Replacemnt go file to re-apply the custom files on boot.
+  * ^^ Replacemnt go file to re-apply the custom files on boot.
 * boot/config/custom_scripts/get_hdd_info.sh
- * ^^ Retrieves the disk serial numbers via smrtctl/hdparm
+  * ^^ Retrieves the disk serial numbers via smrtctl/hdparm
 * boot/rules.d/60-persistent-storage.rules
- * ^^ Contains the new disk allocation rules
+  * ^^ Contains the new disk allocation rules
   
 You can use the following setup script to automatically install the files:
 
