@@ -10,6 +10,9 @@ Also, I found this post on reddit that acted as the basis of this fix:
 [the_dreaded_usb_das_enclsoure_and_none_reporting](https://www.reddit.com/r/unRAID/comments/1fpi8ps/the_dreaded_usb_das_enclsoure_and_none_reporting/)  
 Thanks [wlatic](https://www.reddit.com/user/wlatic/)!
 
+ALSO - DO THIS AT YOUR OWN RISK.
+I AM NOT RESPONSIBLE IF YOU DESTROY YOUR ARRAY AND ALL OF YOUR FILES!
+
 ## The Problem
 
 The new version of Unraid (7+) has UASP enabled in the kernel, which might break the naming convention of your USB drives, making your array configuration invalid.
