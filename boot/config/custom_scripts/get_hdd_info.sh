@@ -25,11 +25,7 @@ if [ -n "$model" ] && [ -n "$serial" ]; then
     # Replace spaces in the model number with underscores
     model=$(echo "$model" | sed 's/ /_/g')
 
-    # Combine the formatted model number and serial number
-    combined_info="ID_SERIAL=${model}_${serial}"
-
-    echo "DevNode: $1, Model: $model, Serial: $serial" >> /var/log/syslog
-    echo "DevNode: $1, Combined_info: ${model}_${serial}" >> /var/log/syslog
+    echo "DevNode: $1, ID_SERIAL=${model}_${serial}" >> /var/log/syslog
     # Output the combined information
     echo "ID_SERIAL=${model}_${serial}"
 fi
