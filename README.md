@@ -128,8 +128,10 @@ Now we need to modify the 60-persistent-storage.rules and add our USB controller
 nano /boot/config/rules.d/60-persistent-storage.rules
 ```
 
-Go to line 62 and change the ATTRS{idProduct}=="0715", ATTRS{idVendor}=="2109" values to the ones of your USB Controller  
+Go to line 62 and change the ATTRS{idProduct}=="xxxx", ATTRS{idVendor}=="xxxx" values to the ones of your USB Controller  
 [Finding your USB controller ID's](#Finding-your-USB-controller-ID)
+
+For example, my entry is as follows:
 
 ```
 # Override for VIA Labs 2109:0715
