@@ -191,7 +191,7 @@ DevNode: /dev/sdc, Name: TOSHIBA_MG08ACA16TE_XXXXXXXEF57H
 And your drives should show up in your array in unraid.  
 (You might need to refresh the page)
 
-You won't need to run these commands on every boot, as they are added to your go file and run on boot.
+You won't need to run these commands everytime, as they are added to your go file and run on boot.
 
 ## Bonus: How can I check if UASP is enabled?
 
