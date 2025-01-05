@@ -296,7 +296,11 @@ This should show that it can read the device model/serial correctly.
 
 # Reverting the changes
 
-If you want to revert the changes, it's as simple as running the following commands:
+If you want to revert the changes, it's as simple as running the following uninstall script:
+```sh
+wget -qO- "https://raw.githubusercontent.com/chill-uk/unraid-uasp-fix/refs/heads/main/uninstall.sh" | bash
+```
+Or manually run the following commands:
 ```sh
 cd /boot/config
 # if go.orig and go exists, remove the modified go file and restore go.orig to go
@@ -329,6 +333,7 @@ The output should look something like this:
 # Start the Management Utility
 /usr/local/sbin/emhttp
 ```
+SUCCESS!
 
 ## Bonus: How can I check if UASP is enabled?
 
