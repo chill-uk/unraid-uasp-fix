@@ -268,7 +268,7 @@ IMPORT builtin 'path_id' /etc/udev/rules.d/60-persistent-storage.rules:90
 This should show that it's reading the rules file: /etc/udev/rules.d/60-persistent-storage.rules
 And that it's using our new /usr/local/bin/get_hdd_info.sh file to construct the ID_SERIAL.
 
-### Check device details with hdparm
+### Check device details with smartctl
 
 ```sh
 smartctl -i "/dev/sda"
