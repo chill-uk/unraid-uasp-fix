@@ -32,7 +32,7 @@ But you miss out on performance improvements and reduction of processing overhea
 
 * Modifying the storage naming logic.
   * It's a slightly more involved and you may need to re-apply the fix everytime you update unraid.
-  * But you get all the added benefits of UASP.
+  * You get all of the added benefits of UASP.
 
 For both, you will first need to find the problamatic USB controller ID.
 
@@ -71,26 +71,52 @@ nano /boot/syslinux/syslinux.cfg
 ```
 
 Add the following append entry "usb_storage.quirks=xxxx:xxxx:u" to your main Unraid OS menu item.   
-(where xxxx:xxxx was your controller ID from earlier) 
+(where xxxx:xxxx is your controller ID from earlier) 
 
 For example..  
 From this:
 ```
-...
+default menu.c32
+menu title Lime Technology, Inc.
+prompt 0
+timeout 50
 label Unraid OS
   menu default
   kernel /bzimage
   append initrd=/bzroot
-...
+label Unraid OS GUI Mode
+  kernel /bzimage
+  append initrd=/bzroot,/bzroot-gui
+label Unraid OS Safe Mode (no plugins, no GUI)
+  kernel /bzimage
+  append initrd=/bzroot unraidsafemode
+label Unraid OS GUI Safe Mode (no plugins)
+  kernel /bzimage
+  append initrd=/bzroot,/bzroot-gui unraidsafemode
+label Memtest86+
+  kernel /memtest
 ```
 To this:
 ```
-...
+default menu.c32
+menu title Lime Technology, Inc.
+prompt 0
+timeout 50
 label Unraid OS
   menu default
   kernel /bzimage
   append initrd=/bzroot usb_storage.quirks=2109:0715:u
-...
+label Unraid OS GUI Mode
+  kernel /bzimage
+  append initrd=/bzroot,/bzroot-gui
+label Unraid OS Safe Mode (no plugins, no GUI)
+  kernel /bzimage
+  append initrd=/bzroot unraidsafemode
+label Unraid OS GUI Safe Mode (no plugins)
+  kernel /bzimage
+  append initrd=/bzroot,/bzroot-gui unraidsafemode
+label Memtest86+
+  kernel /memtest
 ```
 ```
 Ctrl-X, Y to save.
@@ -101,31 +127,29 @@ Reboot your system and now UASP should be disabled.
 
 # Option (2) Modifying udevadm to work with UASP:
 
-## How does Unraid (and other linux distros) allocate the naming scheme of disks.
+## A Quick note about udevadm and .rules files.
 
 Unraid uses ```"udevadm"``` along with a set of rules ```"/lib/udev/rules.d/60-persistent-storage.rules"``` to create the naming scheme for disks.  
-Luckily for us, we can "overwrite" the rules by placing a version in "/etc/udev/rules.d/" while leaving the original untouched.  
+Luckily for us, we can "overwrite" the rules by placing a new version in "/etc/udev/rules.d/" while leaving the original in "/lib/udev/rules.d" untouched.  
 ```Any rules in "/etc/udev/rules.d/" take priority over the ones stored in "/lib/udev/rules.d"```
 
 ## Download the neccesary files from Github.
 
-All of the files needed are as followed:
+All of the files needed are as follows:
 
-```
-boot/config/go  <-- Replacemnt go file to re-apply the custom files on boot.
-boot/config/custom_scripts/get_hdd_info.sh <-- Retrieves the disk serial numbers via smrtctl/hdparm
-rules.d/60-persistent-storage.rules <-- Contains the new disk allocation rules
-```
-
+* boot/config/go  <-- Replacemnt go file to re-apply the custom files on boot.
+* boot/config/custom_scripts/get_hdd_info.sh <-- Retrieves the disk serial numbers via smrtctl/hdparm
+* rules.d/60-persistent-storage.rules <-- Contains the new disk allocation rules
+  
 You can use the following setup script to autmatically install the files:
 
 ```sh
 wget -qO- "https://raw.githubusercontent.com/chill-uk/unraid-uasp-fix/refs/heads/main/setup.sh" | bash
 ```
 
-Or manually copy the files in the boot folder (keeping the same folder structure as the repo).
+Or you can manually copy the files into the boot folder (keeping the same folder structure as the repo).
 
-Now we need to modify the 60-persistent-storage.rules and add our USB controller ID.
+Now we need to modify the "/boot/config/rules.d/60-persistent-storage.rules" to add our USB controller ID.
 
 ```bash
 nano /boot/config/rules.d/60-persistent-storage.rules
@@ -157,7 +181,7 @@ udevadm trigger
 cat /var/log/syslog | grep "/dev/sd*"
 ```
 
-You should get the following output:
+You should get something like the following output:
 
 ```
 DevNode: /dev/sdd, Name: TOSHIBA_MG08ACA16TE_XXXXXXX4FVGG
@@ -169,8 +193,7 @@ DevNode: /dev/sdc, Name: TOSHIBA_MG08ACA16TE_XXXXXXXEF57H
 And your drives should show up in your array in unraid.  
 (You might need to refresh the page)
 
-You won't need to run these commands on every boot, as they are added to your go file.  
-So your drives should have the correct names on each boot.
+You won't need to run these commands on every boot, as they are added to your go file and run on boot.
 
 ## Bonus: How can I check if UASP is enabled?
 
