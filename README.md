@@ -119,7 +119,7 @@ label Memtest86+
   kernel /memtest
 ```
 ```
-Ctrl-X, Y to save.
+Ctrl-X, Y, ENTER to save.
 ```
 NOTE: DO NOT REMOVE OR EDIT ANY OTHER PART OF THIS FILE!
 
@@ -165,11 +165,9 @@ For example, my entry is as follows:
 KERNEL=="sd*[!0-9]|sr*", ENV{ID_SERIAL}!="?*", ATTRS{idProduct}=="0715", ATTRS{idVendor}=="2109", SUBSYSTEMS=="usb", IMPORT{program}="/usr/local/bin/get_hdd_info.sh $devnode", ENV{ID_BUS}="usb"
 ```
 
-Save and exit.
-
 ```
-Ctrl-X, Y to save.
-``` 
+Ctrl-X, Y, ENTER to save.
+```
 
 ## Testing
 
