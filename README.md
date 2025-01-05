@@ -197,6 +197,74 @@ And your drives should show up in your array in unraid.
 
 You won't need to run these commands everytime, as they are added to your go file and run on boot.
 
+## Trobuleshooting
+
+There are a few commands you can use to see what's going on:
+
+### List all SCSI devices:
+```sh
+lsblk -S
+```
+OUTPUT
+```sh
+NAME HCTL       TYPE VENDOR   MODEL                        REV SERIAL                           TRAN
+sda  1:0:0:0    disk TOSHIBA  MG08ACA16TE                 4002 TOSHIBA_MG08ACA16TE_XXXXXXXMF57H usb
+sdb  2:0:0:0    disk TOSHIBA  MG08ACA16TE                 0102 TOSHIBA_MG08ACA16TE_XXXXXXXDFVGG usb
+sdc  3:0:0:0    disk TOSHIBA  MG08ACA16TE                 4002 TOSHIBA_MG08ACA16TE_XXXXXXXEF57H usb
+sdd  4:0:0:0    disk TOSHIBA  MG08ACA16TE                 0102 TOSHIBA_MG08ACA16TE_XXXXXXX4FVGG usb
+sde  0:0:0:0    disk Kingston DataTraveler 3.0            0000 XXXXXXXXXXXXXXXXD8870AB4         usb
+sdf  5:0:0:0    disk ATA      Samsung SSD 870 QVO 2TB SVQ02B6Q XXXXXXXXX10022M                  sata
+```
+This will show the /dev/sdX name, along with the VENDOR,MODEL and SERIAL for easy validation
+
+### Print the /dev/disk tree
+
+```sh
+tree /dev/disk
+```
+OUTPUT
+```sh
+...
+├── by-id
+│   ├── ata-Samsung_SSD_870_QVO_2TB_XXXXXXXXX10022M -> ../../sdf
+│   ├── ata-Samsung_SSD_870_QVO_2TB_XXXXXXXXX10022M-part1 -> ../../sdf1
+│   ├── usb-Kingston_DataTraveler_3.0_XXXXXXXXXXXXXXXXD8870AB4-0:0 -> ../../sde
+│   ├── usb-Kingston_DataTraveler_3.0_XXXXXXXXXXXXXXXXD8870AB4-0:0-part1 -> ../../sde1
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXX4FVGG -> ../../sdd
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXX4FVGG-part1 -> ../../sdd1
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXEF57H -> ../../sdc
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXEF57H-part1 -> ../../sdc1
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXMF57H -> ../../sda
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXMF57H-part1 -> ../../sda1
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXDFVGG -> ../../sdb
+│   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXDFVGG-part1 -> ../../sdb1
+...
+```
+
+### Test your udevadm rules
+
+```sh
+udevadm test $(udevadm info -q path -n /dev/sda)
+```
+OUTPUT
+```
+...
+Reading rules file: /lib/udev/rules.d/60-persistent-alsa.rules
+Reading rules file: /lib/udev/rules.d/60-persistent-input.rules
+Reading rules file: /lib/udev/rules.d/60-persistent-storage-tape.rules
+Reading rules file: /etc/udev/rules.d/60-persistent-storage.rules
+Reading rules file: /lib/udev/rules.d/60-persistent-v4l.rules
+Reading rules file: /lib/udev/rules.d/60-sensor.rules
+Reading rules file: /lib/udev/rules.d/60-serial.rules
+...
+IMPORT '/usr/local/bin/get_hdd_info.sh /dev/sda' /etc/udev/rules.d/60-persistent-storage.rules:61
+starting '/usr/local/bin/get_hdd_info.sh /dev/sda'
+'/usr/local/bin/get_hdd_info.sh /dev/sda'(out) 'ID_SERIAL=TOSHIBA_MG08ACA16TE_XXXXXXXMF57H'
+'/usr/local/bin/get_hdd_info.sh /dev/sda' [882017] exit with return code 0
+LINK 'disk/by-id/usb-TOSHIBA_MG08ACA16TE_XXXXXXXMF57H' /etc/udev/rules.d/60-persistent-storage.rules:68
+IMPORT builtin 'path_id' /etc/udev/rules.d/60-persistent-storage.rules:90
+```
+
 ## Bonus: How can I check if UASP is enabled?
 
 You can check to see if UASP is enabled on your version of Unraid by running this in the terminal:  
