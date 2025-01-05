@@ -21,10 +21,11 @@ Unraid 6.x
 ![Unraid6](/assets/unraid6.png)
 Unraid 7.x
 ![Unraid7](/assets/unraid7.png)
+My drives now report their SCSI ID instead of their serial numbers.
 
-### Solutions
+### Some solutions
 
-There are 2 workarounds:
+There are 2 workarounds we'll cover:
 * Disabling UASP
   * That's a valid solution if you just want to get it working as it was in Unraid 6. 
 But you miss out on performance improvements and reduction of processing overhead. 
