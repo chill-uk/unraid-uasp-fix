@@ -37,7 +37,7 @@ But you miss out on performance improvements and reduction of processing overhea
 
 For both, you will first need to find the problamatic USB controller ID.
 
-### Finding your USB controller ID
+# REQUIRED - Finding your USB controller ID
 
 Run this in the terminal of your Unraid server:  
 
