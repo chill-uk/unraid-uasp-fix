@@ -240,7 +240,7 @@ OUTPUT
 │   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXDFVGG-part1 -> ../../sdb1
 ...
 ```
-This should show that your drives are getting the correct ID_BUS and SERIAL_ID.
+This should show that your drives are getting the correct ID_BUS and ID_SERIAL.
 
 ### Test your udevadm rules
 
