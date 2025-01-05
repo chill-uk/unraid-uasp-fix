@@ -180,7 +180,7 @@ We can test to see if it's all working by running the follwing commands in the t
 ```sh
 udevadm control --reload-rules
 udevadm trigger
-cat /var/log/syslog | grep "/dev/sd*"
+tail /var/log/syslog | grep "/dev/sd*"
 ```
 
 You should get something like the following output:
