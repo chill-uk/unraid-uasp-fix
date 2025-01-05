@@ -59,7 +59,7 @@ Note the ID values down.
 
 # Option (1) Disabling UASP in Unraid 7.
 
-Now that you have the [USB controller ID's](###Finding-your-USB-controller-ID), we need to modify the syslinux.cfg file:
+Now that you have the [USB controller ID's](#Finding-your-USB-controller-ID), we need to modify the syslinux.cfg file:
 
 Open the syslinux.cfg file in nano
 
@@ -93,8 +93,6 @@ label Unraid OS
 Ctrl-X, Y to save.
 ```
 NOTE: DO NOT REMOVE OR EDIT ANY OTHER PART OF THIS FILE!
-
-sed -i '/label Unraid OS$/,/append initrd=\/bzroot/ s/append initrd=\/bzroot/& usb_storage.quirks=2109:0715:u/' /boot/syslinux/syslinux.cfg
 
 Reboot your system and now UASP should be disabled.
 
@@ -131,7 +129,7 @@ nano /boot/config/rules.d/60-persistent-storage.rules
 ```
 
 Go to line 62 and change the ATTRS{idProduct}=="0715", ATTRS{idVendor}=="2109" values to the ones of your USB Controller  
-[Finding your USB controller ID's](###Finding-your-USB-controller-ID)
+[Finding your USB controller ID's](#Finding-your-USB-controller-ID)
 
 ```
 # Override for VIA Labs 2109:0715
