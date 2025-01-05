@@ -240,6 +240,7 @@ OUTPUT
 │   ├── usb-TOSHIBA_MG08ACA16TE_XXXXXXXDFVGG-part1 -> ../../sdb1
 ...
 ```
+This should show that your drives are getting the correct ID_BUS and SERIAL_ID.
 
 ### Test your udevadm rules
 
@@ -264,6 +265,8 @@ starting '/usr/local/bin/get_hdd_info.sh /dev/sda'
 LINK 'disk/by-id/usb-TOSHIBA_MG08ACA16TE_XXXXXXXMF57H' /etc/udev/rules.d/60-persistent-storage.rules:68
 IMPORT builtin 'path_id' /etc/udev/rules.d/60-persistent-storage.rules:90
 ```
+This should show that it's reading the rules file: /etc/udev/rules.d/60-persistent-storage.rules
+And that it's using our new /usr/local/bin/get_hdd_info.sh file to construct the ID_SERIAL.
 
 ### Check device details with hdparm
 
@@ -288,6 +291,43 @@ SATA Version is:  SATA 3.3, 6.0 Gb/s (current: 6.0 Gb/s)
 Local Time is:    Sun Jan  5 08:39:03 2025 CET
 SMART support is: Available - device has SMART capability.
 SMART support is: Enabled
+```
+This should show that it can read the device model/serial correctly.
+
+# Reverting the changes
+
+If you want to revert the changes, it's as simple as running the following commands:
+```sh
+cd /boot/config
+# if go.orig and go exists, remove the modified go file and restore go.orig to go
+[ -f go.orig ] && [ -f go ] && rm go && mv go.orig go
+
+# if get_hdd_info.sh exists, delete it
+[ -f custom_scripts/get_hdd_info.sh ] && rm custom_scripts/get_hdd_info.sh
+# if the custom_scripts directory exists and has no files inside, delete it
+[ -d custom_scripts ] && [ ! "$(ls -A custom_scripts)" ] && rm -r custom_scripts
+
+# if 60-persistent-storage.rules exists, delete it
+[ -f rules.d/60-persistent-storage.rules ] && rm rules.d/60-persistent-storage.rules
+# if the rules.d directory exists and has no files inside, delete it
+[ -d rules.d ] && [ ! "$(ls -A rules.d)" ] && rm -r rules.d
+
+# reload udev rules
+udevadm control --reload-rules
+# trigger udev rules
+udevadm trigger
+```
+
+Check to make sure your go file has been restored:
+```sh
+cat /boot/config/go
+```
+The output should look something like this:
+```sh
+#!/bin/bash
+
+# Start the Management Utility
+/usr/local/sbin/emhttp
 ```
 
 ## Bonus: How can I check if UASP is enabled?
