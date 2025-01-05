@@ -265,6 +265,31 @@ LINK 'disk/by-id/usb-TOSHIBA_MG08ACA16TE_XXXXXXXMF57H' /etc/udev/rules.d/60-pers
 IMPORT builtin 'path_id' /etc/udev/rules.d/60-persistent-storage.rules:90
 ```
 
+### Check device details with hdparm
+
+```sh
+smartctl -i "/dev/sda"
+```
+OUTPUT
+```sh
+=== START OF INFORMATION SECTION ===
+Model Family:     Toshiba MG08ACA... Enterprise Capacity HDD
+Device Model:     TOSHIBA MG08ACA16TE
+Serial Number:    XXXXXXXMF57H
+LU WWN Device Id: 5 000039 af8e0f402
+Firmware Version: 4002
+User Capacity:    16,000,900,661,248 bytes [16.0 TB]
+Sector Sizes:     512 bytes logical, 4096 bytes physical
+Rotation Rate:    7200 rpm
+Form Factor:      3.5 inches
+Device is:        In smartctl database 7.3/5625
+ATA Version is:   ACS-3 T13/2161-D revision 5
+SATA Version is:  SATA 3.3, 6.0 Gb/s (current: 6.0 Gb/s)
+Local Time is:    Sun Jan  5 08:39:03 2025 CET
+SMART support is: Available - device has SMART capability.
+SMART support is: Enabled
+```
+
 ## Bonus: How can I check if UASP is enabled?
 
 You can check to see if UASP is enabled on your version of Unraid by running this in the terminal:  
