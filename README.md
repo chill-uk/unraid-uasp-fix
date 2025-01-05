@@ -141,7 +141,7 @@ All of the files needed are as follows:
 * boot/config/custom_scripts/get_hdd_info.sh <-- Retrieves the disk serial numbers via smrtctl/hdparm
 * rules.d/60-persistent-storage.rules <-- Contains the new disk allocation rules
   
-You can use the following setup script to autmatically install the files:
+You can use the following setup script to automatically install the files:
 
 ```sh
 wget -qO- "https://raw.githubusercontent.com/chill-uk/unraid-uasp-fix/refs/heads/main/setup.sh" | bash
@@ -149,7 +149,7 @@ wget -qO- "https://raw.githubusercontent.com/chill-uk/unraid-uasp-fix/refs/heads
 
 Or you can manually copy the files into the boot folder (keeping the same folder structure as the repo).
 
-Now we need to modify the "/boot/config/rules.d/60-persistent-storage.rules" to add our USB controller ID.
+Now we need to modify the "/boot/config/rules.d/60-persistent-storage.rules" file to add our USB controller ID.
 
 ```bash
 nano /boot/config/rules.d/60-persistent-storage.rules
