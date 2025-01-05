@@ -104,7 +104,7 @@ Reboot your system and now UASP should be disabled.
 ## How does Unraid (and other linux distros) allocate the naming scheme of disks.
 
 Unraid uses ```"udevadm"``` along with a set of rules ```"/lib/udev/rules.d/60-persistent-storage.rules"``` to create the naming scheme for disks.  
-Luckily for us, we can "overwrite" the rules by placing a new version in "/etc/udev/rules.d/" while leaving the original untouched.
+Luckily for us, we can "overwrite" the rules by placing a version in "/etc/udev/rules.d/" while leaving the original untouched.  
 ```Any rules in "/etc/udev/rules.d/" take priority over the ones stored in "/lib/udev/rules.d"```
 
 ## Download the neccesary files from Github.
