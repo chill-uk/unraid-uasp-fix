@@ -63,7 +63,7 @@ Note the ID values down.
 
 # Option (1) Disabling UASP in Unraid 7.
 
-Now that you have the [USB controller ID's](#Finding-your-USB-controller-ID), we need to modify the syslinux.cfg file:
+Now that you have the [USB controller ID's](#Required-Finding-your-USB-controller-ID), we need to modify the syslinux.cfg file:
 
 Open the syslinux.cfg file in nano
 
