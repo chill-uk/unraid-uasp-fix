@@ -1,5 +1,6 @@
 cd /boot/config
-mv go go.orig
+# check if go.orig exists, if not, backup go
+[ -f go.orig ] || mv go go.orig
 wget -qO- "https://raw.githubusercontent.com/chill-uk/unraid-uasp-fix/refs/heads/main/boot/config/go" > go
 
 # if the udev/rules.d directory doesn't exist, create it
