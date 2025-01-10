@@ -180,7 +180,7 @@ We can test to see if it's all working by running the follwing commands in the t
 ```sh
 udevadm control --reload-rules
 udevadm trigger
-tail /var/log/syslog | grep "/dev/sd*"
+cat /var/log/syslog | grep "/dev/sd*"
 ```
 
 You should get something like the following output:
@@ -339,6 +339,11 @@ SUCCESS!
 
 You can check to see if UASP is enabled on your version of Unraid by running this in the terminal:  
 
+For Unraid 7.0.0 - Stable
+```sh
+cat /usr/src/linux-6.6.68-Unraid/.config | grep USB_UAS
+```
+For Unraid 7.0.0-rc.2
 ```sh
 cat /usr/src/linux-6.6.66-Unraid/.config | grep USB_UAS
 ```
